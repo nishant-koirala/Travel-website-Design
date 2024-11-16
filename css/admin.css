@@ -1,0 +1,101 @@
+/* Ensure the body and html take up the full height of the viewport */
+html, body {
+    height: 100%;
+    margin: 0;
+}
+
+/* Ensure the sidebar is fixed and takes the full height */
+.sidebar {
+    position: fixed;
+    top: 0;
+    left: 0;
+    bottom: 0;
+    width: 250px;
+    height: 100vh; /* Full viewport height */
+    overflow-y: auto;
+    background-color: #343a40; /* Dark background for sidebar */
+    color: #ffffff; /* White text color */
+}
+
+/* Ensure the main content takes the remaining space */
+.main-content {
+    margin-left: 250px;
+    width: calc(100% - 250px); /* Full width minus the sidebar width */
+    min-height: 100vh; /* Ensure it takes at least the full viewport height */
+}
+
+/* Flex container for full height layout */
+.d-flex {
+    display: flex;
+    height: 100vh;
+}
+
+/* Optional: Adjust padding for the main content */
+.main-content {
+    padding: 20px;
+}
+
+/* Additional styling for header */
+.header {
+    border-bottom: 1px solid #dee2e6;
+    padding-bottom: 15px;
+}
+
+/* Custom CSS for reports page */
+/* Custom CSS for reports page */
+/* Custom CSS for reports page */
+.card {
+    margin-bottom: 20px;
+}
+
+.card-header {
+    background-color: #172b3e00;
+    font-weight: bold;
+}
+
+
+
+.direct-chat {
+    position: relative;
+    background: #fefefe;
+    padding: 0;
+    border-radius: 4px;
+}
+
+.direct-chat-messages {
+    background: #f5f5f5;
+    padding: 10px;
+}
+
+.direct-chat-msg {
+    margin-bottom: 10px;
+    display: flex;
+    align-items: flex-start;
+}
+
+.direct-chat-msg .direct-chat-infos {
+    margin-bottom: 5px;
+}
+
+.direct-chat-msg .direct-chat-text {
+    background-color: #d2d6de;
+    border-radius: 5px;
+    padding: 5px 10px;
+    margin-left: 10px;
+}
+
+.direct-chat-msg .direct-chat-img {
+    border-radius: 50%;
+    width: 40px;
+    height: 40px;
+}
+
+.direct-chat-primary .btn {
+    background-color: #007bff;
+    border-color: #007bff;
+}
+
+.direct-chat-primary .btn-primary {
+    background-color: #007bff;
+    border-color: #007bff;
+}

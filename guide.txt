@@ -1,0 +1,97 @@
+How to Use This Script:
+    1.Copy and paste the entire script into your SQL database client (e.g., phpMyAdmin, MySQL Workbench, or command line).
+    2.Execute each section in order to ensure dependencies like foreign keys are set correctly.
+    3.Adjust details like file paths (e.g., images/img-1.jpg) and package descriptions if needed.
+    4.Add data as per your requirements.
+
+
+-- Step 1: Create and Use Database
+CREATE DATABASE travelDB;
+USE travelDB;
+
+-- Step 2: Create Tables
+CREATE TABLE bookings (
+    id INT AUTO_INCREMENT PRIMARY KEY,
+    name VARCHAR(255) NOT NULL,
+    email VARCHAR(255) NOT NULL,
+    phone VARCHAR(20) NOT NULL,
+    address VARCHAR(255) NOT NULL,
+    location VARCHAR(255) NOT NULL,
+    guests INT NOT NULL,
+    arrivals DATE NOT NULL,
+    leaving DATE NOT NULL,
+    package VARCHAR(255) NOT NULL,
+    created_at TIMESTAMP DEFAULT CURRENT_TIMESTAMP
+);
+
+ALTER TABLE bookings
+ADD COLUMN price DECIMAL(10, 2) NOT NULL;
+
+ALTER TABLE bookings
+ADD COLUMN booking_number VARCHAR(12) NOT NULL;
+
+CREATE TABLE users (
+    id INT AUTO_INCREMENT PRIMARY KEY,
+    name VARCHAR(255) NOT NULL,
+    email VARCHAR(255) UNIQUE NOT NULL,
+    phone VARCHAR(20) NOT NULL,
+    password VARCHAR(255) NOT NULL,
+    address TEXT,
+    dob DATE,
+    role VARCHAR(50) NOT NULL DEFAULT 'user',
+    created_at TIMESTAMP DEFAULT CURRENT_TIMESTAMP
+);
+
+CREATE TABLE sessions (
+    id INT AUTO_INCREMENT PRIMARY KEY,
+    session_id VARCHAR(255) NOT NULL,
+    user_id INT,
+    last_activity DATETIME,
+    FOREIGN KEY (user_id) REFERENCES users(id)
+);
+
+CREATE TABLE settings (
+    id INT AUTO_INCREMENT PRIMARY KEY,
+    site_name VARCHAR(255) NOT NULL,
+    site_email VARCHAR(255) NOT NULL
+);
+
+CREATE TABLE messages (
+    id INT AUTO_INCREMENT PRIMARY KEY,
+    name VARCHAR(255) NOT NULL,
+    email VARCHAR(255) NOT NULL,
+    phone VARCHAR(20),
+    message TEXT NOT NULL,
+    submitted_at TIMESTAMP DEFAULT CURRENT_TIMESTAMP
+);
+
+CREATE TABLE packages (
+    id INT AUTO_INCREMENT PRIMARY KEY,
+    name VARCHAR(255) NOT NULL,
+    description TEXT NOT NULL,
+    price DECIMAL(10, 2) NOT NULL,
+    image VARCHAR(255) NOT NULL
+);
+
+-- Step 3:
+Will be used in future updates
+ Populate or Update Packages Table
+-- Add or Update package details
+INSERT INTO packages (name, description, price, image) VALUES
+('Himalayan Adventure', 'Embark on an exhilarating trek...', 1500, 'images/img-1.jpg'),
+('Cultural Tour of Kathmandu', 'Discover the rich heritage...', 800, 'images/img-2.jpg'),
+('Chitwan Jungle Safari', 'Immerse yourself in the wild beauty...', 1200, 'images/img-3.jpg'),
+('Lumbini Pilgrimage Tour', 'Visit the birthplace of Lord Buddha...', 1000, 'images/img-4.jpg'),
+('Pokhara Lakeside Retreat', 'Relax by the serene Phewa Lake...', 900, 'images/img-5.jpg'),
+('Everest Base Camp Trek', 'Challenge yourself with a trek...', 2000, 'images/img-6.jpg'),
+('Bhaktapur Heritage Walk', 'Explore the medieval city of Bhaktapur...', 750, 'images/img-7.jpg'),
+('Annapurna Circuit Trek', 'Traverse diverse landscapes...', 1800, 'images/img-8.jpg'),
+('Gosaikunda Holy Lake Trek', 'Journey to the sacred Gosaikunda Lake...', 1300, 'images/img-9.jpg'),
+('Upper Mustang Expedition', 'Explore the remote and mystical region...', 2200, 'images/img-10.jpg'),
+('Rara Lake Serenity Tour', 'Discover the tranquil beauty of Rara Lake...', 1700, 'images/img-11.jpg'),
+('Tilicho Lake Trek', 'Join an adventurous trek to Tilicho Lake...', 700, 'images/img-12.jpg');
+
+-- Step 4: Run Example Queries
+SELECT * FROM packages;
+SELECT * FROM bookings;
+SELECT * FROM users;
