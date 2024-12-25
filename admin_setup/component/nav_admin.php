@@ -14,26 +14,45 @@
     </style>
 </head>
 <body>
-    <div class="d-flex">
-        <!-- Sidebar -->
-        <nav class="sidebar bg-dark text-light p-3">
-            <h3 class="text-center py-3">Admin Panel</h3>
-            <ul class="nav flex-column">
-            <li class="nav-item">
-                    <a class="nav-link text-light" href="admin.php">Dashboard</a>
-                </li>
-                <li class="nav-item">
-                    <a class="nav-link text-light" href="all_booking.php">Bookings</a>
-                </li>
-                    <a class="nav-link text-light" href="users.php">Users</a>
-                </li>
-               
-                <li class="nav-item">
-                    <a class="nav-link text-light" href="reports.php">Reports</a>
-                </li>
-                <li class="nav-item">
-                    <a class="nav-link text-light" href="../logout.php">Logout</a>
-                </li>
-            </ul>
-        </nav>
-     
+<?php
+// Determine the relative base path
+$basePath = (basename(dirname($_SERVER['PHP_SELF'])) === 'package') ? '../' : '';
+?>
+
+<nav class="sidebar bg-dark text-light p-3">
+    <h3 class="text-center py-3">Admin Panel</h3>
+    <ul class="nav flex-column">
+        <!-- Admin Pages -->
+        <li class="nav-item">
+            <a class="nav-link text-light" href="<?= $basePath ?>admin.php">Dashboard</a>
+        </li>
+        <li class="nav-item">
+            <a class="nav-link text-light" href="<?= $basePath ?>all_booking.php">All Bookings</a>
+        </li>
+        <li class="nav-item">
+            <a class="nav-link text-light" href="<?= $basePath ?>users.php">Users</a>
+        </li>
+
+        <li class="nav-item">
+            <a class="nav-link text-light" href="<?= $basePath ?>reports.php">Reports</a>
+        </li>
+
+        <!-- Package Management -->
+            <a class="nav-link text-light" href="<?= $basePath ?>package/update-package.php">Update Package</a>
+        </li>
+      
+
+        <!-- Logout -->
+        <li class="nav-item">
+            <a class="nav-link text-light" href="<?= $basePath ?>../logout.php">Logout</a>
+        </li>
+    </ul>
+</nav>
+
+
+
+
+
+
+
+

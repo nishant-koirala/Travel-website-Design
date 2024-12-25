@@ -10,8 +10,8 @@ html, body {
     top: 0;
     left: 0;
     bottom: 0;
-    width: 250px;
-    height: 100vh; /* Full viewport height */
+    width: 250px !important;
+    height: 100vh !important; /* Full viewport height */
     overflow-y: auto;
     background-color: #343a40; /* Dark background for sidebar */
     color: #ffffff; /* White text color */
@@ -19,20 +19,20 @@ html, body {
 
 /* Ensure the main content takes the remaining space */
 .main-content {
-    margin-left: 250px;
-    width: calc(100% - 250px); /* Full width minus the sidebar width */
+    margin-left: 250px !important;
+    width: calc(100% - 250px) !important; /* Full width minus the sidebar width */
     min-height: 100vh; /* Ensure it takes at least the full viewport height */
 }
 
 /* Flex container for full height layout */
 .d-flex {
     display: flex;
-    height: 100vh;
+    height: 100vh !important;
 }
 
 /* Optional: Adjust padding for the main content */
 .main-content {
-    padding: 20px;
+    padding: 20px !important;
 }
 
 /* Additional styling for header */
