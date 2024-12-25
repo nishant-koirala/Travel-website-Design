@@ -32,9 +32,9 @@
    <!-- header section starts  -->
 
 <section class="header">
-    <a href="home.php" class="logo">Local Duluas.</a>
+    <a href="index.php" class="logo">Local Duluas.</a>
     <nav class="navbar">
-        <a href="home.php">home</a>
+        <a href="index.php">home</a>
         <a href="about.php">about</a>
         <a href="package.php">package</a>
         <?php
@@ -45,6 +45,10 @@
             echo '<a href="login.php">login</a>'; // Show login button if not logged in
         }
         ?>
+        <form action="search_results.php" method="GET" class="search-form">
+        <input type="text" id="search_input" name="q" placeholder="Search packages..." onkeyup="searchPackages()" />
+        <div id="suggestions" class="suggestions-dropdown"></div>
+    </form>
     </nav>
     <div id="menu-btn" class="fas fa-bars"></div>
 </section>

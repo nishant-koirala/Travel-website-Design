@@ -40,7 +40,7 @@ html::-webkit-scrollbar-thumb{
 }
 
 section{
-   padding:5rem 10%;
+   padding:5rem 2%;
 }
 
 @keyframes fadeIn {
@@ -601,6 +601,46 @@ section{
 
 
 
+/* Style for the search form */
+.search-form {
+    position: relative;
+}
+.navbar {
+   display: flex;
+   justify-content: space-evenly; /* Ensure there is space between the logo and the navbar items */
+   align-items: center; /* Align items vertically in the center */
+   flex-wrap: wrap;
+}
+.navbar a {
+   margin-right: 10px; /* Add spacing between links */
+}
+#search_input {
+    padding: 10px;
+    border: 1px solid #ccc;
+    border-radius: 5px;
+    width: 250px;
+}
+
+.suggestions-dropdown {
+    position: absolute;
+    top: 100%;
+    left: 0;
+    right: 0;
+    background-color: white;
+    border: 1px solid #ccc;
+    max-height: 200px;
+    overflow-y: auto;
+    z-index: 10;
+}
+
+.suggestion-item {
+    padding: 10px;
+    cursor: pointer;
+}
+
+.suggestion-item:hover {
+    background-color: #f0f0f0;
+}
 
 
 
@@ -674,6 +714,11 @@ section{
    }
 
 }
+
+
+
+
+
 
 @media (max-width:450px){
 

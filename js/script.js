@@ -65,3 +65,31 @@ document.addEventListener('DOMContentLoaded', function() {
       },
    });
 });
+
+
+
+
+function searchPackages() {
+   let query = document.getElementById('search_input').value;
+   
+   if (query.length == 0) {
+       document.getElementById('suggestions').innerHTML = '';
+       return;
+   }
+
+   const xhr = new XMLHttpRequest();
+   xhr.open('GET', 'search_suggest.php?q=' + query, true);
+   xhr.onload = function () {
+       if (xhr.status === 200) {
+           document.getElementById('suggestions').innerHTML = xhr.responseText;
+       }
+   };
+   xhr.send();
+}
+
+// Function to handle package suggestion selection
+function selectSuggestion(packageTitle) {
+   document.getElementById('search_input').value = packageTitle;
+   document.getElementById('suggestions').innerHTML = '';
+   window.location.href = 'search_results.php?q=' + encodeURIComponent(packageTitle);
+}
