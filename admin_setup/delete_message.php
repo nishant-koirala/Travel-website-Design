@@ -24,11 +24,11 @@ if (isset($_POST['message_id'])) {
         $_SESSION['error_message'] = "Failed to delete message: " . $e->getMessage();
     }
 
-    header('Location: reports.php'); // Adjust the redirect URL as needed
+    header('Location: recivedMessage.php'); // Adjust the redirect URL as needed
     exit();
 } else {
     // If no message_id is provided, redirect to the messages page
-    header('Location: reports.php');
+    header('Location: recivedMessage.php');
     exit();
 }
 ?>

@@ -1,3 +1,4 @@
+<?php include 'component/navbar_links.php'; ?>
 <?php
 include 'database/db_connect.php';  // Include database connection
 
@@ -16,11 +17,13 @@ if (isset($_GET['q'])) {
 ?>
 
 <div class="heading" style="background:url(images/header-bg-2.png) no-repeat">
-    <h1>Search Results for "<?php echo htmlspecialchars($query); ?>"</h1>
+        <h1 class="heading-title">Matching Packages</h1>
+        
+    
 </div>
 
-<section class="packages">
-   <h1 class="heading-title">Matching Packages</h1>
+<section class="packages ">
+  <h1 class="search-result-msg">Search Results for "<?php echo htmlspecialchars($query); ?>"</h1>
 
    <div class="box-container">
    <?php

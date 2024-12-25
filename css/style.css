@@ -437,17 +437,18 @@ section{
    margin-top: 1rem;
 }
 
-.packages .box-container{
+.packages .box-container {
    display: grid;
-   grid-template-columns: repeat(auto-fit, minmax(30rem, 1fr));
+   grid-template-columns: repeat(auto-fit, minmax(30rem, 1fr)); /* Responsive grid columns */
    gap: 2rem;
+   justify-items: start; /* Ensures each item is at left even when there is just one */
 }
 
-.packages .box-container .box{
-   border:var(--border);
+.packages .box-container .box {
+   border: var(--border);
    box-shadow: var(--box-shadow);
    background: var(--white);
-   display: none;
+   display: block; /* Display the box as block to fit the content */
 }
 
 .packages .box-container .box:nth-child(1),
@@ -455,52 +456,44 @@ section{
 .packages .box-container .box:nth-child(3),
 .packages .box-container .box:nth-child(4),
 .packages .box-container .box:nth-child(5),
-.packages .box-container .box:nth-child(6){
-   display: inline-block;
+.packages .box-container .box:nth-child(6) {
+   display: block; /* Ensure items are displayed properly */
 }
 
-.packages .box-container .box:hover .image img{
-   transform: scale(1.1);
-}
-
-.packages .box-container .box .image{
+.packages .box-container .box .image {
    height: 25rem;
    overflow: hidden;
 }
 
-.packages .box-container .box .image img{
+.packages .box-container .box .image img {
    height: 100%;
    width: 100%;
    object-fit: cover;
    transition: .2s linear;
 }
 
-.packages .box-container .box .content{
-   padding:2rem;
+.packages .box-container .box .content {
+   padding: 2rem;
    text-align: center;
 }
 
-.packages .box-container .box .content h3{
+.packages .box-container .box .content h3 {
    font-size: 2.5rem;
-   color:var(--black);
+   color: var(--black);
 }
 
-.packages .box-container .box .content p{
+.packages .box-container .box .content p {
    font-size: 1.5rem;
-   color:var(--light-black);
+   color: var(--light-black);
    line-height: 2;
-   padding:1rem 0;
+   padding: 1rem 0;
 }
 
-.packages .load-more{
+.packages .load-more {
    text-align: center;
    margin-top: 2rem;
 }
 
-.booking .book-form{
-   padding:2rem;
-   background: var(--light-bg);
-}
 
 .booking .book-form .flex{
    display: flex;
@@ -642,6 +635,13 @@ section{
     background-color: #f0f0f0;
 }
 
+.search-result-msg {
+   color: var(--black);
+   font-size: 3vw;
+   font-weight:bolder;
+   padding-bottom: 2vw;
+
+}
 
 
 

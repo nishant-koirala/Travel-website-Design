@@ -368,46 +368,7 @@ html, body {
         </div>
 
  
-<div class="direct-messages">
-    <div class="row g-3">
-        <div class="col-md-12">
-            <div class="card mb-3">
-                <div class="card-header">
-                    <h3 class="mt-4">Submitted Messages</h3>
-                                   
 
-                </div>
-                <?php
-                
-                if (isset($_SESSION['success_message'])) {
-                    echo '<div class="alert alert-success">' . $_SESSION['success_message'] . '</div>';
-                    unset($_SESSION['success_message']);
-                }
-                if (isset($_SESSION['error_message'])) {
-                    echo '<div class="alert alert-danger">' . $_SESSION['error_message'] . '</div>';
-                    unset($_SESSION['error_message']);
-                }
-                ?>
-                <div class="card-body">
-                    <!-- Display Submitted Messages -->
-                    <ul class="list-group">
-                        <?php foreach ($messages as $msg): ?>
-                            <li class="list-group-item">
-                                <strong><?php echo htmlspecialchars($msg['name']); ?></strong> (<?php echo htmlspecialchars($msg['email']); ?>)
-                                <p><?php echo nl2br(htmlspecialchars($msg['message'])); ?></p>
-                                <small class="text-muted">Submitted on <?php echo date('F j, Y, g:i a', strtotime($msg['submitted_at'])); ?></small>
-                                <form action="delete_message.php" method="post" class="d-inline float-end ms-2">
-                                    <input type="hidden" name="message_id" value="<?php echo $msg['id']; ?>">
-                                    <button type="submit" class="btn btn-danger btn-sm">Delete</button>
-                                </form>
-                            </li>
-                        <?php endforeach; ?>
-                    </ul>
-                </div>
-            </div>
-        </div>
-    </div>
-</div>
     <!-- Scripts -->
     <script>
         var customerGrowthData = <?php echo $customerGrowthJson; ?>;

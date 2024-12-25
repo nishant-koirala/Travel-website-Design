@@ -14,6 +14,18 @@
     </style>
 </head>
 <body>
+    <?php 
+try {
+    // Query to fetch the count of unread messages (seen = 0)
+    $newMessagesQuery = "SELECT COUNT(*) AS new_message_count FROM messages WHERE seen = 0";
+    $newMessagesResult = $pdo->query($newMessagesQuery);
+    $newMessages = $newMessagesResult->fetch(PDO::FETCH_ASSOC);
+    $newMessagesCount = $newMessages['new_message_count'];
+} catch (PDOException $e) {
+    error_log("Error fetching data: " . $e->getMessage());
+    die("Error fetching data. Please try again later.");
+}
+?>
 <?php
 // Determine the relative base path
 $basePath = (basename(dirname($_SERVER['PHP_SELF'])) === 'package') ? '../' : '';
@@ -31,6 +43,16 @@ $basePath = (basename(dirname($_SERVER['PHP_SELF'])) === 'package') ? '../' : ''
         </li>
         <li class="nav-item">
             <a class="nav-link text-light" href="<?= $basePath ?>users.php">Users</a>
+        </li>
+
+         <!-- Messages Link with Notification Badge -->
+         <li class="nav-item">
+            <a class="nav-link text-light" href="<?= $basePath ?>recivedMessage.php">
+                Messages 
+                <?php if ($newMessagesCount > 0): ?>
+                    <span class="badge bg-danger ms-2"><?= $newMessagesCount; ?></span>
+                <?php endif; ?>
+            </a>
         </li>
 
         <li class="nav-item">
