@@ -9,7 +9,44 @@
     <!-- Custom CSS -->
     <link rel="stylesheet" href="../css/admin.css">
     <style>
-
+    .nav-item {
+        position: relative;
+    }
+    
+    .dropdown {
+        position: relative;
+        display: inline-block;
+    }
+    
+    .dropdown-content {
+        display: none;
+        position: absolute;
+        top: 100%;
+        left: 0;
+        background: #495057;
+        min-width: 200px;
+        box-shadow: 0 8px 16px rgba(0,0,0,0.2);
+        z-index: 1000;
+        border-radius: 4px;
+        border-top: 2px solid #6c757d;
+    }
+    
+    .dropdown:hover .dropdown-content {
+        display: block;
+    }
+    
+    .dropdown-item {
+        display: block;
+        padding: 10px 15px;
+        color: white;
+        text-decoration: none;
+        transition: background-color 0.3s;
+    }
+    
+    .dropdown-item:hover {
+        background: #6c757d;
+        color: white;
+    }
     </style>
     </style>
 </head>
@@ -59,10 +96,23 @@ $basePath = (basename(dirname($_SERVER['PHP_SELF'])) === 'package') ? '../' : ''
             <a class="nav-link text-light" href="<?= $basePath ?>reports.php">Reports</a>
         </li>
 
-        <!-- Package Management -->
-            <a class="nav-link text-light" href="<?= $basePath ?>package/update-package.php">Update Package</a>
+        <li class="nav-item">
+            <a class="nav-link text-light" href="<?= $basePath ?>chatbot_history_new.php">Chatbot history</a>
         </li>
-      
+        <li class="nav-item">
+            <a class="nav-link text-light" href="<?= $basePath ?>api_usage_enhanced.php">📊 API Usage</a>
+        </li>
+        
+
+        <!-- Package Management -->
+        <li class="nav-item dropdown">
+            <a class="nav-link text-light" href="<?= $basePath ?>package/package_form.php">📦 Add New Package</a>
+            <div class="dropdown-content">
+                <a class="dropdown-item" href="<?= $basePath ?>package/packages_enhanced.php">📋 Package List</a>
+                <a class="dropdown-item" href="<?= $basePath ?>package/package_form.php">✏️ Edit Package</a>
+                <a class="dropdown-item" href="<?= $basePath ?>package/update-package.php">🔄 Update Package</a>
+            </div>
+        </li>
 
         <!-- Logout -->
         <li class="nav-item">

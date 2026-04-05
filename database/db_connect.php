@@ -7,7 +7,7 @@ try {
 $servername = "localhost";  // Your server name
 $username = "root";         // Your database username
 $password = "";             // Your database password
-$dbname = "traveldb";  // Your database name
+$dbname = "travel_website_db";  // Your database name
 
     // Data Source Name (DSN) for MySQL
     $dsn = "mysql:host=$servername;dbname=$dbname;charset=utf8";

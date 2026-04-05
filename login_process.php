@@ -18,7 +18,8 @@ try {
     // Check if the email is for the admin
     if ($email === $admin_email && $password === $admin_password) {
         $_SESSION['user'] = 'admin';
-        $_SESSION['username'] = 'Admin'; // Store the admin name in the session if needed
+        $_SESSION['username'] = 'Admin';
+        $_SESSION['user_id'] = null;
         header('Location: admin_setup/admin.php');
         exit();
     } else {
@@ -29,9 +30,10 @@ try {
 
         // Verify the user's password (assuming it's hashed in the database)
         if ($user && password_verify($password, $user['password'])) {
-            $_SESSION['user'] = 'customer';
-            $_SESSION['username'] = $user['name']; // Store the user's name in the session if needed
-            $_SESSION['role'] = $user['role']; // Store the user's role in the session
+            $_SESSION['user'] = $user['role'] === 'admin' ? 'admin' : 'customer';
+            $_SESSION['user_id'] = (int) $user['id'];
+            $_SESSION['username'] = $user['name'];
+            $_SESSION['role'] = $user['role'];
 
             // Redirect based on user role
             if ($user['role'] === 'admin') {

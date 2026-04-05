@@ -137,10 +137,16 @@
     transition: background-color 0.3s, transform 0.2s; /* Smooth transitions */
 }
 
-#message-form button[type="submit"]:hover {
+        #message-form button[type="submit"]:hover {
     background-color: #0056b3; /* Darker shade for hover */
     transform: translateY(-2px); /* Slight lift effect */
 }
+        .chatbot-quick { padding: 6px 10px 0; display: flex; flex-wrap: wrap; gap: 6px; }
+        .chatbot-quick button {
+            font-size: 11px; padding: 4px 8px; border: 1px solid #ccc; border-radius: 4px;
+            background: #f8f9fa; cursor: pointer; color: #007bff;
+        }
+        .chatbot-quick button:hover { background: #e9ecef; }
     </style>
 </head>
 <body>
@@ -159,6 +165,11 @@
             <!-- Messages will be inserted here -->
         </div>
         <div id="chat-form">
+            <div class="chatbot-quick">
+                <button type="button" data-q="What is the cheapest package?">Cheapest trip</button>
+                <button type="button" data-q="Show me the most expensive luxury package">Luxury trip</button>
+                <button type="button" data-q="I want to speak to a human">Human agent</button>
+            </div>
             <textarea id="message-input" rows="3" placeholder="Type your message..."></textarea>
             <button id="send-message">Send</button>
         </div>
@@ -172,6 +183,33 @@
             const messageInput = document.getElementById('message-input');
             const sendMessageButton = document.getElementById('send-message');
             const chatMessages = document.getElementById('chat-messages');
+            const CHATBOT_URL = (typeof window.CHATBOT_API === 'string' && window.CHATBOT_API)
+                ? window.CHATBOT_API
+                : 'chatbot/chat.php';
+
+            function escapeHtml(text) {
+                const div = document.createElement('div');
+                div.textContent = text;
+                return div.innerHTML;
+            }
+
+            function showLegacyContactForm() {
+                chatMessages.innerHTML += `
+                    <div class="message admin">
+                        <img src="images/img-1.jpg" class="avatar" alt="Admin Avatar">
+                        <div class="text" id="response-form">
+                            <form id="message-form">
+                                <label>Name: <input type="text" name="name" required></label><br>
+                                <label>Email: <input type="email" name="email" required></label><br>
+                                <label>Phone Number: <input type="text" name="phone" required></label><br>
+                                <label>Message: <textarea name="message" required></textarea></label><br>
+                                <button type="submit">Submit</button>
+                            </form>
+                        </div>
+                    </div>
+                `;
+                chatMessages.scrollTop = chatMessages.scrollHeight;
+            }
 
             // Toggle chat window
             chatWidget.addEventListener('click', function() {
@@ -184,46 +222,84 @@
                 chatWidget.style.display = 'flex';
             });
 
-            sendMessageButton.addEventListener('click', function() {
-                const message = messageInput.value.trim();
-                if (message) {
+            document.querySelectorAll('.chatbot-quick [data-q]').forEach(function(btn) {
+                btn.addEventListener('click', function() {
+                    const q = this.getAttribute('data-q');
+                    if (q) {
+                        postChatMessage(q);
+                    }
+                });
+            });
+
+            function postChatMessage(message) {
+                if (!message || !message.trim()) {
+                    return;
+                }
+                message = message.trim();
+                chatMessages.innerHTML += `
+                    <div class="message user">
+                        <div class="text">${escapeHtml(message)}</div>
+                    </div>
+                `;
+                messageInput.value = '';
+
+                fetch(CHATBOT_URL, {
+                    method: 'POST',
+                    headers: { 'Content-Type': 'application/json' },
+                    body: JSON.stringify({ message: message })
+                })
+                .then(function(res) { return res.json(); })
+                .then(function(data) {
+                    const reply = (data && typeof data.reply === 'string')
+                        ? data.reply
+                        : 'Sorry, I could not read the response. Please try again.';
+                    const wantContact = (data && data.show_contact_form === true)
+                        || /\b(human|agent|person|call\s*me|contact\s*form|leave\s+a\s+message|representative|talk\s+to\s+human)\b/i.test(message);
+                    var bubbleId = 'adm-' + Date.now();
                     chatMessages.innerHTML += `
-                        <div class="message user">
-                            <div class="text">${message}</div>
+                        <div class="message admin">
+                            <img src="images/img-1.jpg" class="avatar" alt="Admin Avatar">
+                            <div class="text" id="${bubbleId}"></div>
                         </div>
                     `;
+                    var el = document.getElementById(bubbleId);
+                    if (reply.length >= 50) {
+                        var i = 0;
+                        var step = 2;
+                        var delay = Math.max(10, Math.min(20, Math.floor(1600 / reply.length)));
+                        function tick() {
+                            if (!el) { return; }
+                            if (i >= reply.length) {
+                                el.innerHTML = escapeHtml(reply).replace(/\n/g, '<br>');
+                                chatMessages.scrollTop = chatMessages.scrollHeight;
+                                if (wantContact) { showLegacyContactForm(); }
+                                return;
+                            }
+                            i = Math.min(reply.length, i + step);
+                            el.innerHTML = escapeHtml(reply.slice(0, i)).replace(/\n/g, '<br>');
+                            chatMessages.scrollTop = chatMessages.scrollHeight;
+                            setTimeout(tick, delay);
+                        }
+                        tick();
+                    } else {
+                        el.innerHTML = escapeHtml(reply).replace(/\n/g, '<br>');
+                        chatMessages.scrollTop = chatMessages.scrollHeight;
+                        if (wantContact) { showLegacyContactForm(); }
+                    }
+                })
+                .catch(function() {
+                    chatMessages.innerHTML += `
+                        <div class="message admin">
+                            <img src="images/img-1.jpg" class="avatar" alt="Admin Avatar">
+                            <div class="text">${escapeHtml('Sorry, the assistant is unreachable right now. Please try again.')}</div>
+                        </div>
+                    `;
+                    chatMessages.scrollTop = chatMessages.scrollHeight;
+                });
+            }
 
-                    messageInput.value = '';
-
-                    // Simulate a delay for admin response
-                    setTimeout(function() {
-                        chatMessages.innerHTML += `
-                            <div class="message admin">
-                                <img src="images/img-1.jpg" class="avatar" alt="Admin Avatar">
-                                <div class="text">
-                                    Sorry to keep you waiting, unfortunately all of our agents are currently busy or away, 
-                                    please leave a message and we will get back to you as soon as possible. What’s the best 
-                                    email to reach you on?
-                                </div>
-                            </div>
-                        `;
-                        chatMessages.innerHTML += `
-                            <div class="message admin">
-                                <img src="images/img-1.jpg" class="avatar" alt="Admin Avatar">
-                                <div class="text" id="response-form">
-                                    <form id="message-form">
-                                        <label>Name: <input type="text" name="name" required></label><br>
-                                        <label>Email: <input type="email" name="email" required></label><br>
-                                        <label>Phone Number: <input type="text" name="phone" required></label><br>
-                                        <label>Message: <textarea name="message" required></textarea></label><br>
-                                        <button type="submit">Submit</button>
-                                    </form>
-                                </div>
-                            </div>
-                        `;
-                        chatMessages.scrollTop = chatMessages.scrollHeight; // Scroll to the bottom
-                    }, 1000);
-                }
+            sendMessageButton.addEventListener('click', function() {
+                postChatMessage(messageInput.value);
             });
 
             chatMessages.addEventListener('submit', function(e) {
@@ -239,7 +315,7 @@
                     if (data.status === 'success') {
                         responseForm.innerHTML = '<p>Thank you for your message. We will get back to you soon!</p>';
                     } else {
-                        responseForm.innerHTML = `<p>Error: ${data.message}</p>`;
+                        responseForm.innerHTML = '<p>Error: ' + escapeHtml(String(data.message != null ? data.message : 'Unknown')) + '</p>';
                     }
                 })
                 .catch(error => {

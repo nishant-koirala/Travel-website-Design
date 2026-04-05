@@ -1,15 +1,6 @@
 <?php
-// Database connection
-$servername = "localhost";
-$username = "root";  // Replace with your database username
-$password = "";  // Replace with your database password
-$dbname = "travelDB";
-
-$conn = new mysqli($servername, $username, $password, $dbname);
-
-if ($conn->connect_error) {
-    die("Connection failed: " . $conn->connect_error);
-}
+// Database connection - Use the new database
+include 'database/db_connect.php';
 
 // Validate and sanitize input data
 $name = filter_var($_POST['name']);
@@ -21,7 +12,7 @@ $guests = filter_var($_POST['guests']);
 $arrivals = $_POST['arrivals'];
 $leaving = $_POST['leaving'];
 $package = filter_var($_POST['package']);
-$price = filter_var($_POST['price']);
+$price = filter_var($_POST['totalPrice'] ?? $_POST['price']); // Use total price if available
 
 if (!$email) {
     echo "<script>alert('Invalid email address.'); window.location.href = 'book.php';</script>";
@@ -46,10 +37,22 @@ $bookingNumber = strtoupper(bin2hex(random_bytes(6)));  // 12-character unique c
 $totalPrice = $price * $guests;
 
 // Insert data into the database
-$stmt = $conn->prepare("INSERT INTO bookings (booking_number, name, email, phone, address, location, guests, arrivals, leaving, package, price) VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?)");
-$stmt->bind_param("ssssssssssd", $bookingNumber, $name, $email, $phone, $address, $location, $guests, $arrivals, $leaving, $package, $totalPrice);
+$stmt = $pdo->prepare("INSERT INTO bookings (booking_number, name, email, phone, address, location, guests, arrivals, leaving, package, price) VALUES (:booking_number, :name, :email, :phone, :address, :location, :guests, :arrivals, :leaving, :package, :price)");
+$result = $stmt->execute([
+    'booking_number' => $bookingNumber,
+    'name' => $name,
+    'email' => $email,
+    'phone' => $phone,
+    'address' => $address,
+    'location' => $location,
+    'guests' => $guests,
+    'arrivals' => $arrivals,
+    'leaving' => $leaving,
+    'package' => $package,
+    'price' => $totalPrice
+]);
 
-if ($stmt->execute()) {
+if ($result) {
     // Prepare the PDF invoice
     require('fpdf186/fpdf.php'); // Ensure this path is correct
 
@@ -164,7 +167,4 @@ if ($stmt->execute()) {
 } else {
     echo "<script>alert('There was an error processing your booking. Please try again.'); window.location.href = 'book.php';</script>";
 }
-
-$stmt->close();
-$conn->close();
 ?>

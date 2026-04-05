@@ -1,0 +1,32 @@
+2026-04-04T13:54:03Z query="Compare Everest Base Camp trek vs Annapurna Circuit trek" intent=COMPARE ai=0
+2026-04-04T13:54:10Z query="What is the cheapest package?" intent=CHEAPEST ai=0
+2026-04-04T13:54:13Z query="Show me the most expensive luxury package" intent=MOST_EXPENSIVE ai=0
+2026-04-04T13:54:17Z query="Recommend a package for me" intent=RECOMMENDATION ai=0
+2026-04-04T13:55:51Z query="Show me trips under $500" intent=GENERAL ai=0
+2026-04-04T14:35:06Z query="can you recomend me an mountain treacking" intent=GENERAL ai=0
+2026-04-04T14:35:37Z query="cuggest me an romantic treack" intent=GENERAL ai=0
+2026-04-04T14:36:42Z query="Suggest a trek for me" intent=RECOMMENDATION ai=0
+2026-04-04T14:38:41Z query="Suggest a 5-day romantic trekking itinerary in Nepal under $700" intent=RECOMMENDATION ai=0
+2026-04-04T14:39:05Z query="Plan a unique adventure trek for me including cultural stops" intent=GENERAL ai=0
+2026-04-04T14:55:36Z query="suggest me an romantic trip" intent=RECOMMENDATION ai=0
+2026-04-04T14:57:48Z query="suggest me an romantic trip" intent=RECOMMENDATION ai=0
+2026-04-04T15:00:05Z query="suggest me an romantic trip" intent=RECOMMENDATION ai=0
+2026-04-04T15:02:17Z query="Plan a 5-day itinerary" intent=RECOMMENDATION ai=0
+2026-04-04T15:03:05Z query="Unique adventure trek" intent=RECOMMENDATION ai=0
+2026-04-04T15:07:48Z query="Unique adventure trek" intent=RECOMMENDATION ai=1
+2026-04-04T15:08:09Z query="what can be an romantic treck" intent=RECOMMENDATION ai=1
+2026-04-04T15:18:34Z query="Suggest a romantic trek in Nepal" intent=RECOMMENDATION ai=1
+2026-04-04T15:20:30Z query="can i get an romantic treck suggestion" intent=RECOMMENDATION ai=1
+2026-04-04T15:21:06Z query="can you help me find details about the everest base camp" intent=GENERAL ai=1
+2026-04-04T15:31:38Z query="suggest me an romantic date" intent=RECOMMENDATION ai=1
+2026-04-04T15:37:23Z query="suggest me an romantic date" intent=RECOMMENDATION ai=1
+2026-04-04T15:43:39Z query="suggest me an romantic date" intent=RECOMMENDATION ai=1
+2026-04-04T15:44:24Z query="What is the cheapest package?" intent=CHEAPEST ai=1
+2026-04-04T15:44:32Z query="Recommend a package for me" intent=RECOMMENDATION ai=1
+2026-04-04T15:44:45Z query="Show me the most expensive luxury package" intent=MOST_EXPENSIVE ai=1
+2026-04-04T15:44:54Z query="I want to speak to a human" intent=GENERAL ai=1
+2026-04-04T15:46:13Z query="suggest me an treaking trip" intent=RECOMMENDATION ai=1
+2026-04-04T15:56:09Z query="hi" intent=GENERAL ai=1
+2026-04-04T15:58:23Z query="hi" intent=GENERAL ai=1
+2026-04-04T15:59:13Z query="suggest me an good vacation package" intent=RECOMMENDATION ai=1
+2026-04-04T15:59:56Z query="provide me an romantic trip plan" intent=RECOMMENDATION ai=1

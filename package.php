@@ -41,7 +41,10 @@ try {
                    <h3><?php echo htmlspecialchars($package['title']); ?></h3>
                    <p>Price: $<?php echo number_format($package['price'], 2); ?> per person</p>
                    <p><?php echo htmlspecialchars($package['description']); ?></p>
-                   <a href="book.php?package=<?php echo urlencode($package['title']); ?>&price=<?php echo urlencode($package['price']); ?>" class="btn">Book Now</a>
+                   <div style="display: flex; gap: 0.5rem; margin-top: 1rem;">
+                       <a href="package_details.php?id=<?php echo $package['id']; ?>" class="btn">View Details</a>
+                       <a href="book_enhanced.php?package=<?php echo urlencode($package['title']); ?>&price=<?php echo urlencode($package['price']); ?>" class="btn">Book Now</a>
+                   </div>
                </div>
            </div>
            <?php

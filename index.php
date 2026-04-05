@@ -1,5 +1,5 @@
 <?php include 'component/navbar_links.php'; ?>
-<?php include 'message.php'; ?>
+<?php include 'message_enhanced.php'; ?>
 <!-- header section ends -->
 
 <!-- home section starts  -->
