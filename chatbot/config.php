@@ -31,7 +31,7 @@ if (!defined('GEMINI_API_KEY')) {
         $geminiKey = ($env !== false && $env !== '') ? trim($env) : '';
     }
     if ($geminiKey === '') {
-        $geminiKey = 'AIzaSyA2BDiAg07sJOxejuFcxSxMbIYc7pPc2zA';
+        $geminiKey = 'AIzaSyDdgTx6WCE1W-tS5an-pGTI4oofD8yh1pk';
     }
     define('GEMINI_API_KEY', $geminiKey);
 }

@@ -1,0 +1,168 @@
+# System Files
+.DS_Store
+.DS_Store?
+._*
+.Spotlight-V100
+.Trashes
+ehthumbs.db
+Thumbs.db
+
+# IDE and Editor Files
+.vscode/
+.idea/
+*.swp
+*.swo
+*~
+.vscode/settings.json
+.vscode/launch.json
+.vscode/extensions.json
+.vscode/*.code-snippets
+
+# Local Configuration Files
+.env
+.env.local
+.env.*.local
+config.local.php
+config.local.*
+database/config.local.php
+
+# Logs and Debug Files
+*.log
+logs/
+debug_*.php
+error_log
+access_log
+*.log.*
+
+# Temporary and Cache Files
+tmp/
+temp/
+cache/
+*.tmp
+*.temp
+*.cache
+cache/
+temp/
+*.bak
+*.old
+
+# Database Backups and Dumps
+*.sql
+*.sql.gz
+*.sql.zip
+database/backups/
+database/dumps/
+database/*.sql
+database/*.sql.gz
+
+# Upload Directories and User Content
+uploads/
+user_uploads/
+files/
+media/
+images/uploads/
+*.upload
+
+# Node.js and Package Management
+node_modules/
+npm-debug.log*
+yarn-debug.log*
+yarn-error.log*
+package-lock.json
+yarn.lock
+
+# Composer and PHP Dependencies
+vendor/
+composer.lock
+
+# Build and Distribution Files
+dist/
+build/
+release/
+*.min.js
+*.min.css
+*.bundle.js
+*.bundle.css
+
+# Testing and Coverage
+coverage/
+.nyc_output
+*.cover
+.phpunit.result.cache
+tests/coverage/
+
+# Documentation and Notes
+docs/_build/
+*.md.bak
+*.txt.bak
+NOTES.md
+TODO.md
+
+# Archive and Compressed Files
+*.zip
+*.tar.gz
+*.rar
+*.7z
+archives/
+backup/
+
+# Sensitive and Private Files
+*.key
+*.pem
+*.crt
+*.p12
+private/
+secrets/
+credentials/
+*.secret
+
+# Development and Debug Scripts
+debug_*.php
+test_*.php
+demo_*.php
+cleanup_*.php
+setup_*.php
+
+# Unused and Deprecated Files
+unused/
+deprecated/
+old/
+legacy/
+*.old
+*.bak
+*.orig
+
+# Operating System Files
+.DS_Store?
+ehthumbs.db
+Icon?
+._*
+
+# Framework Specific
+.laravel.env
+.cache/
+storage/framework/cache/
+storage/framework/sessions/
+storage/framework/views/
+
+# WordPress (if applicable)
+wp-content/upgrade/
+wp-content/backup-db/
+wp-content/cache/
+wp-content/plugins/akismet/
+
+# Magento (if applicable)
+var/cache/
+var/log/
+var/report/
+etc/modules/
+
+# Custom Project Specific
+fpdf186/
+temp/
+unused/
+database/temp/
+admin_setup/temp/
+logs/
+*.swp
+*.swo
